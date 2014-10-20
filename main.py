@@ -81,6 +81,7 @@ def postLevelSoup(soup, url):
 	urls = []
 	posts = []
 	tags = pl.get_tags(soup)
+	print(tags)
 
 	bodies = pl.get_post_body(soup)
 	users = pl.get_post_user(soup)
