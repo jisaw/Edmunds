@@ -17,8 +17,9 @@ def main():
 		soup = BeautifulSoup(data)
 		lp = soup.find('a', class_ = re.compile('^LastPage'))
 		try:
-			for i in range(len(int(lp.string))):
-				new_end = lp['href'][:lp['href'].find('=')+1] + 'p%s&' % i 
+			for i in range(int(lp.string)):
+				new_num = lp['href'].find('=')+1
+				new_end = lp['href'][:new_num] + 'p%s&' % (i+1) 
 				new_url = 'http://forums.edmunds.com' + new_end
 				if new_url not in start:
 					print(new_url)
