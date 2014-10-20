@@ -27,7 +27,7 @@ def get_post_date(soup):
 
 def get_tags(soup):
 	tags = []
-	meta_tags = soup.find_all(class_ = 'InlineTags Meta')
+	meta_tags = soup.find(class_ = 'InlineTags Meta')
 	tags = meta_tags.find_all('a')
 	for tag in tags:
 		tags.append(tag.string)
