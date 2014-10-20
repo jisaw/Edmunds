@@ -6,6 +6,7 @@ import post_level as pl
 from constants import cxml
 import xml_write as xw
 import re
+import sys
 
 def main():
 	start = []
@@ -70,7 +71,7 @@ def threadLevelSoup(soup, url):
 
 		print("Starting XML Writer")
 
-		xw.makexml(cxml, url)
+		xw.makexml(cxml, url, sys.argv[1])
 
 	
 		

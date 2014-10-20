@@ -1,7 +1,7 @@
 import xml.etree.cElementTree as ET
 from xml.dom import minidom
 
-def makexml(c, url):
+def makexml(c, url, folder):
 	name = '%s.xml' % url[7:]
 	name = name.replace("/", "_")
 	t = c.get_tags()
@@ -47,9 +47,10 @@ def makexml(c, url):
 		body = ET.SubElement(posts, "body")
 		body.text = p[i][2]
 
-	f = open('../../data/' + name, 'w')
+	f = open('../../data/run001/' + name, 'w')
 	with f:
 		tree = ET.ElementTree(thread)
+		tree = prettify(tree)
 		tree.write(f)
 		print("\nXML WRITTEN!!")
 	f.close()

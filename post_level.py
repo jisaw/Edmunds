@@ -13,8 +13,8 @@ def get_post_body(soup):
 
 def get_post_user(soup):
 	usernames = []
-	u = soup.find_all(class_ = 'Username')
-	for user in u:
+	username = soup.find_all(class_ = 'Username')
+	for user in username:
 		usernames.append(user.string)
 	return usernames
 
@@ -27,7 +27,8 @@ def get_post_date(soup):
 
 def get_tags(soup):
 	tags = []
-	t = soup.find_all('a', class_ = re.compile('^Tag'))
-	for tag in t:
+	meta_tags = soup.find_all((class_ = 'InlineTags Meta'))
+	tags = meta_tags.find_all('a')
+	for tag in tags:
 		tags.append(tag.string)
 	return tags
