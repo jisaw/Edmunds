@@ -16,14 +16,17 @@ def main():
 		data = r.text
 		soup = BeautifulSoup(data)
 		lp = soup.find(id = 'PagerBefore')
-		links = lp.find_all('a')
-		for link in links:
-			new_url = 'http://forums.edmunds.com' + link['href'] 
-			if new_url not in start:
-				print(new_url)
-				start.append(new_url)
-			else: 
-				print('Duplicate Link')
+		try:
+			links = lp.find_all('a')
+			for link in links:
+				new_url = 'http://forums.edmunds.com' + link['href'] 
+				if new_url not in start:
+					print(new_url)
+					start.append(new_url)
+				else: 
+					print('Duplicate Link')
+		except:
+			print('\n\n  ERROR  \n\n')
 	for url in start:
 		r = requests.get(url)
 		data = r.text
@@ -92,7 +95,7 @@ def postLevelSoup(soup, url):
 	users = pl.get_post_user(soup)
 	dates = pl.get_post_date(soup)
 
-	lp = soup.find_all(id = 'PagerBefore')
+	lp = soup.find(id = 'PagerBefore')
 	links = lp.find('a')
 	for link in range(len(links)):
 		new_url = link[link]['href']
