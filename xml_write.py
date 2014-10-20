@@ -67,8 +67,11 @@ def makexml(c, url, folder):
 			body = ET.SubElement(posts, "body")
 			body.text = p[i][2]
 	
-		os.system("cd /home/research/projects/edmunds/data")
+		current_dir = os.getcwd()
+		os.chdir("/home/research/projects/edmunds/data")
 		os.system("mkdir %s" % folder)
+		os.chdir(current_dir)
+
 	
 		f = open( name, 'a')
 		with f:
