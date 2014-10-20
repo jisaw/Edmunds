@@ -38,9 +38,9 @@ def get_datetimes(soup):
 		all_nums.append(date['datetime'])
 	for x in range(len(all_nums)):
 		if x%2 == 0:
-			last_posted_datetimes.append(all_nums[x])
-		else:
 			datetimes.append(all_nums[x])
+		else:
+			last_posted_datetimes.append(all_nums[x])
 	return(datetimes, last_posted_datetimes)
 
 def get_nums(soup):
@@ -52,9 +52,9 @@ def get_nums(soup):
 		all_nums.append(i.text)
 	for x in range(len(all_nums)):
 		if x%2 == 0:
-			views.append(all_nums[x])
-		else:
 			replies.append(all_nums[x])
+		else:
+			views.append(all_nums[x])
 	return(replies, views)
 
 
