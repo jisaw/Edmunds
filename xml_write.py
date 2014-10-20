@@ -51,7 +51,7 @@ def makexml(c, url, folder):
 	f = open(prefix + name, 'w')
 	with f:
 		tree = ET.ElementTree(thread)
-		tree = prettify(tree)
+		#tree = prettify(tree)
 		tree.write(f)
 		print("\nXML WRITTEN!!")
 	f.close()
