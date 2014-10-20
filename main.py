@@ -18,11 +18,10 @@ def main():
 		lp = soup.find_all(rel = 'next')
 		for link in lp:
 			new_url = 'http://forums.edmunds.com' + link['href'] 
-			for u in start:
-				if new_url != u:
-					start.append(new_url)
-				else: 
-					print('Duplicate Link')
+			if new_url not in start:
+				start.append(new_url)
+			else: 
+				print('Duplicate Link')
 	for url in start:
 		r = requests.get(url)
 		data = r.text
@@ -95,12 +94,11 @@ def postLevelSoup(soup, url):
 	links = lp.find_all('a')
 	for link in range(len(links)):
 		new_url = link[link]['href']
-		for u in urls:
-			if new_url != u:
-				print(new_url)
-				urls.append(new_url)
-			else:
-				print('Duplicate Link')
+		if new_url not in urls:
+			print(new_url)
+			urls.append(new_url)
+		else:
+			print('Duplicate Link')
 	for url in urls:
 		r = requests.get(url)
 		data = r.text
