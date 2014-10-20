@@ -73,7 +73,7 @@ def makexml(c, url, folder):
 		os.chdir(current_dir)
 
 	
-		f = open( name, 'a')
+		f = open(prefix + name, 'a')
 		with f:
 			tree = ET.ElementTree(thread)
 			#tree = prettify(tree)
