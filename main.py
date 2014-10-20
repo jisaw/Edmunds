@@ -19,6 +19,7 @@ def main():
 		for link in lp:
 			new_url = 'http://forums.edmunds.com' + link['href'] 
 			if new_url not in start:
+				print(new_url)
 				start.append(new_url)
 			else: 
 				print('Duplicate Link')
@@ -91,7 +92,7 @@ def postLevelSoup(soup, url):
 	dates = pl.get_post_date(soup)
 
 	lp = soup.find_all(id = 'PagerBefore')
-	links = lp.find_all('a')
+	links = lp.find('a')
 	for link in range(len(links)):
 		new_url = link[link]['href']
 		if new_url not in urls:
