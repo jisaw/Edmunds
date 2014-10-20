@@ -15,8 +15,9 @@ def main():
 		r = requests.get(url)
 		data = r.text
 		soup = BeautifulSoup(data)
-		lp = soup.find_all(rel = 'next')
-		for link in lp:
+		lp = soup.find(id = 'PagerBefore')
+		links = lp.find_all('a')
+		for link in links:
 			new_url = 'http://forums.edmunds.com' + link['href'] 
 			if new_url not in start:
 				print(new_url)
