@@ -58,6 +58,6 @@ def makexml(c, url, folder):
 
 
 def prettify(elem):
-	rough_string = ElementTree.tostring(elem, 'utf-8')
+	rough_string = ET.tostring(elem, 'utf-8')
 	reparsed = minidom.parseString(rough_string)
 	return reparsed.toprettyxml(indent=" ")
