@@ -47,7 +47,8 @@ def makexml(c, url, folder):
 		body = ET.SubElement(posts, "body")
 		body.text = p[i][2]
 
-	f = open('../../data/run001/' + name, 'w')
+	prefix = '../../data/%s/' % folder
+	f = open(prefix + name, 'w')
 	with f:
 		tree = ET.ElementTree(thread)
 		tree = prettify(tree)
