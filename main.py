@@ -99,7 +99,6 @@ def postLevelSoup(soup, url):
 		users = pl.get_post_user(soup)
 		dates = pl.get_post_date(soup)
 		for i in range(len(bodies)):
-			print(i)
 			posts.append([users[i], dates[i], bodies[i]])
 
 	cxml.set_tags(tags)
