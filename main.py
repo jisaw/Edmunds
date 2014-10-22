@@ -119,7 +119,7 @@ def postExtraction(urls, dataAngel):
 		for i in range(len(bodies)):
 			posts.append([users[i], dates[i], bodies[i]])
 	dataAngel.set_posts(posts)
-	xml_write(dataAngel, url, sys.argv[1])
+	xw.makexml(dataAngel, url, sys.argv[1])
 
 
 #def threadLevelSoup(soup, url):
