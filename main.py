@@ -85,7 +85,9 @@ def postPageExtraction(url, dataAngel):
 	lp = soup.find('a', class_ = re.compile('^LastPage'))
 	try:
 		for i in range(int(lp.string)):
-			new_url = lp['href'][0:-2] + 'p%s' % (i+1) 
+			link = lp['href']
+			print(link)
+			new_url = link[:-2] + 'p%s' % (i+1) 
 			if new_url not in urls:
 				print(new_url)
 				urls.append(new_url)
@@ -95,8 +97,7 @@ def postPageExtraction(url, dataAngel):
 		print('\n\n  ERROR  \n\n')
 	tags = pl.get_tags(soup)
 	dataAngel.set_tags(tags)
-	for url in urls:
-		print(url)
+
 	posts = postExtraction(urls)
 
 	dataAngel.set_posts(posts)
