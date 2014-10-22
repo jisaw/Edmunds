@@ -3,7 +3,7 @@ import requests
 import constants
 import thread_level as tl
 import post_level as pl
-from constants import dataAngel
+from constants import xmlout
 import xml_write as xw
 import re
 import sys
