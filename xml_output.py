@@ -11,15 +11,15 @@ class xmlout:
 
 
 	def __init__(self):
-		#self.orig_poster  = None
-		#self.posted_at_date  = None
-		#self.posted_at_datetime  = None
-		#self.views  = None
-		#self.replies  = None
-		#self.lastposted_date  = None
-		#self.lasposted_datetime  = None
-		#self.tags  = None
-		#self.posts  = None
+		self.orig_poster  = ""
+		self.posted_at_date  = ""
+		self.posted_at_datetime  = ""
+		self.views  = ""
+		self.replies  = ""
+		self.lastposted_date  = ""
+		self.lasposted_datetime  = ""
+		self.tags  = []
+		self.posts  = []
 
 	def set_orig_poster(self, value):
 		self.orig_poster = value
