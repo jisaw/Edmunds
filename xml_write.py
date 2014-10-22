@@ -55,7 +55,7 @@ def makexml(dataAngel, url, folder):
 	os.system("mkdir %s" % folder)
 	os.chdir(current_dir)
 
-	f = open(name, 'w')
+	f = open(prefix + name, 'w')
 	with f:
 		tree = ET.ElementTree(thread)
 		#tree = prettify(tree)
