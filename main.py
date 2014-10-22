@@ -9,7 +9,7 @@ import sys
 from xml_output import xmlout
 
 def main():
-	for url in constants.urls_urls:
+	for url in constants.start_urls:
 		urls = []
 		r = requests.get(url)
 		data = r.text
