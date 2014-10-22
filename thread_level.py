@@ -5,6 +5,7 @@ def get_post_level(soup):
 	urls = []
 	threads = soup.find_all(class_ = 'Title')
 	for thread in threads:
+		print(thread['href'])
 		urls.append(thread['href'])
 	return urls
 

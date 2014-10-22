@@ -81,6 +81,7 @@ def metaDataExtraction(urls):
 def postPageExtraction(url, dataAngel):
 	urls = []
 	r = requests.get(url)
+	print(url)
 	data = r.text
 	soup = BeautifulSoup(data)
 	lp = soup.find('a', class_ = re.compile('^LastPage'))
@@ -88,7 +89,7 @@ def postPageExtraction(url, dataAngel):
 		for i in range(int(lp.string)):
 			link = lp['href']
 			print(link)
-			new_url = link[:-len(str(i))] + 'p%s' % (i+1) 
+			new_url = link[:-len(str(i))-1] + 'p%s' % (i+1) 
 			if new_url not in urls:
 				print(new_url)
 				urls.append(new_url)
