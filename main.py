@@ -33,6 +33,7 @@ def main():
 
 def metaDataExtraction(urls):
 	for url in urls:
+		print(url)
 		r = requests.get(url)
 		data = r.text
 		soup = BeautifulSoup(data)
