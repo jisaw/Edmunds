@@ -8,6 +8,8 @@ import re
 import sys
 from xml_output import xmlout
 
+folder = sys.argv[1]
+
 def main():
 	for url in constants.start_urls:
 		urls = []
@@ -104,22 +106,25 @@ def postPageExtraction(url, dataAngel):
 
 def postExtraction(urls, dataAngel):
 	posts = []
-	for url in urls:
-		r = requests.get(url)
-		print('Got url: ' + url)
-		data = r.text
-		soup = BeautifulSoup(data)
-
-		bodies = pl.get_post_body(soup)
-		print('Got bodies')
-		users = pl.get_post_user(soup)
-		print('Got users')
-		dates = pl.get_post_date(soup)
-		print('Got dates')
-		for i in range(len(bodies)):
-			posts.append([users[i], dates[i], bodies[i]])
+	try: 
+		for url in urls:
+			r = requests.get(url)
+			print('Got url: ' + url)
+			data = r.text
+			soup = BeautifulSoup(data)
+	
+			bodies = pl.get_post_body(soup)
+			print('Got bodies')
+			users = pl.get_post_user(soup)
+			print('Got users')
+			dates = pl.get_post_date(soup)
+			print('Got dates')
+			for i in range(len(bodies)):
+				posts.append([users[i], dates[i], bodies[i]])
+	except:
+		print("\n\nERROR\n\n")
 	dataAngel.set_posts(posts)
-	xw.makexml(dataAngel, url, sys.argv[1])
+	xw.makexml(dataAngel, url, folder)
 
 
 #def threadLevelSoup(soup, url):
