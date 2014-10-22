@@ -111,10 +111,11 @@ def postExtraction(urls, dataAngel):
 		soup = BeautifulSoup(data)
 
 		bodies = pl.get_post_body(soup)
-		print(bodies)
+		print('Got bodies')
 		users = pl.get_post_user(soup)
-		print(users)
+		print('Got users')
 		dates = pl.get_post_date(soup)
+		print('Got dates')
 		for i in range(len(bodies)):
 			posts.append([users[i], dates[i], bodies[i]])
 	dataAngel.set_posts(posts)
