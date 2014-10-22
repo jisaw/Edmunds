@@ -56,5 +56,3 @@ def get_nums(soup):
 		else:
 			views.append(all_nums[x])
 	return(replies, views)
-
-
