@@ -1,6 +1,4 @@
-from xml_output import xmlout
 
-cxml = xmlout() 
 
 start_urls = ('http://forums.edmunds.com/discussions/tagged/acura/acura',
                 'http://forums.edmunds.com/discussions/tagged/alfa-romeo/alfa-romeo',
