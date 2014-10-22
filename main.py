@@ -27,9 +27,9 @@ def main():
 					print('Duplicate Link')
 		except:
 			print('\n\n  ERROR  \n\n')
-	for url in urls:
-		print(url)
-	metaDataExtraction(urls)
+		for url in urls:
+			print(url)
+		metaDataExtraction(urls)
 
 def metaDataExtraction(urls):
 	for url in urls:
