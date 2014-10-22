@@ -27,8 +27,6 @@ def main():
 					print('Duplicate Link')
 		except:
 			print('\n\n  ERROR  \n\n')
-		for url in urls:
-			print(url)
 		metaDataExtraction(urls)
 
 def metaDataExtraction(urls):
@@ -101,26 +99,26 @@ def postPageExtraction(url, dataAngel):
 	tags = pl.get_tags(soup)
 	dataAngel.set_tags(tags)
 
-	posts = postExtraction(urls)
-
-	dataAngel.set_posts(posts)
-
-	xml_write(dataAngel, url, sys.argv[1])
+	postExtraction(urls, dataAngel)
 
 
-def postExtraction(urls):
+def postExtraction(urls, dataAngel):
 	posts = []
 	for url in urls:
 		r = requests.get(url)
+		print('Got url: ' + url)
 		data = r.text
 		soup = BeautifulSoup(data)
 
 		bodies = pl.get_post_body(soup)
+		print(bodies)
 		users = pl.get_post_user(soup)
+		print(users)
 		dates = pl.get_post_date(soup)
 		for i in range(len(bodies)):
 			posts.append([users[i], dates[i], bodies[i]])
-	return posts
+	dataAngel.set_posts(posts)
+	xml_write(dataAngel, url, sys.argv[1])
 
 
 #def threadLevelSoup(soup, url):
