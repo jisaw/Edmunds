@@ -87,7 +87,7 @@ def postPageExtraction(url, dataAngel):
 		for i in range(int(lp.string)):
 			link = lp['href']
 			print(link)
-			new_url = link[:len(str(i))+1] + 'p%s' % (i+1) 
+			new_url = link[:-len(str(i))+1] + 'p%s' % (i+1) 
 			if new_url not in urls:
 				print(new_url)
 				urls.append(new_url)
