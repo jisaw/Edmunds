@@ -8,6 +8,7 @@ import re
 import sys
 from xml_output import xmlout
 import html5lib
+from html5lib import treebuilders
 
 folder = sys.argv[1]
 
@@ -15,9 +16,10 @@ folder = sys.argv[1]
 def main():
   for url in constants.start_urls:
     urls = []
-    r = requests.get(url)
-    data = r.text
-    soup = BeautifulSoup(data, 'html5lib')
+    with open(url) as f:
+      parser = html5lib.HTMLParser(tree = treebuilders.getTreeBuilder("beautifulsoup"))
+      data = parser.parse(f)
+      soup = BeautifulSoup(data)
     lp = soup.find('a', class_=re.compile('^LastPage'))
     try:
       for i in range(int(lp.string)):
@@ -37,9 +39,10 @@ def main():
 def metaDataExtraction(urls):
   for url in urls:
     print(url)
-    r = requests.get(url)
-    data = r.text
-    soup = BeautifulSoup(data, 'html5lib')
+    with open(url) as f:
+      parser = html5lib.HTMLParser(tree = treebuilders.getTreeBuilder("beautifulsoup"))
+      data = parser.parse(f)
+      soup = BeautifulSoup(data)
 
     original_posters = tl.get_original_posters(soup)
 
@@ -80,10 +83,11 @@ def metaDataExtraction(urls):
 
 def postPageExtraction(url, dataAngel):
   urls = []
-  r = requests.get(url)
   print(url)
-  data = r.text
-  soup = BeautifulSoup(data, 'html5lib')
+  with open(url) as f:
+      parser = html5lib.HTMLParser(tree = treebuilders.getTreeBuilder("beautifulsoup"))
+      data = parser.parse(f)
+      soup = BeautifulSoup(data)
   lp = soup.find('a', class_=re.compile('^LastPage'))
   try:
     for i in range(int(lp.string)):
@@ -107,10 +111,11 @@ def postExtraction(urls, dataAngel, name_url):
   posts = []
   try:
     for url in urls:
-      r = requests.get(url)
       print('Got url: ' + url)
-      data = r.text
-      soup = BeautifulSoup(data, 'html5lib')
+      with open(url) as f:
+        parser = html5lib.HTMLParser(tree = treebuilders.getTreeBuilder("beautifulsoup"))
+        data = parser.parse(f)
+        soup = BeautifulSoup(data)
 
       bodies = pl.get_post_body(soup)
       print('Got bodies')
