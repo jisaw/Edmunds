@@ -7,6 +7,7 @@ import xml_write as xw
 import re
 import sys
 from xml_output import xmlout
+import html5lib
 
 folder = sys.argv[1]
 
@@ -16,7 +17,7 @@ def main():
     urls = []
     r = requests.get(url)
     data = r.text
-    soup = BeautifulSoup(data)
+    soup = BeautifulSoup(data, 'html5lib')
     lp = soup.find('a', class_=re.compile('^LastPage'))
     try:
       for i in range(int(lp.string)):
@@ -38,7 +39,7 @@ def metaDataExtraction(urls):
     print(url)
     r = requests.get(url)
     data = r.text
-    soup = BeautifulSoup(data)
+    soup = BeautifulSoup(data, 'html5lib')
 
     original_posters = tl.get_original_posters(soup)
 
@@ -82,15 +83,12 @@ def postPageExtraction(url, dataAngel):
   r = requests.get(url)
   print(url)
   data = r.text
-  soup = BeautifulSoup(data)
+  soup = BeautifulSoup(data, 'html5lib')
   lp = soup.find('a', class_=re.compile('^LastPage'))
   try:
     for i in range(int(lp.string)):
       link = lp['href']
-      print(link)
       num = len(lp.string) + 1
-      if num > 300:
-        break
       new_url = link[:-num] + 'p%s' % (i + 1)
       if new_url not in urls:
         print(new_url)
@@ -112,7 +110,7 @@ def postExtraction(urls, dataAngel, name_url):
       r = requests.get(url)
       print('Got url: ' + url)
       data = r.text
-      soup = BeautifulSoup(data)
+      soup = BeautifulSoup(data, 'html5lib')
 
       bodies = pl.get_post_body(soup)
       print('Got bodies')
