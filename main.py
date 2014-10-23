@@ -102,10 +102,10 @@ def postPageExtraction(url, dataAngel):
   tags = pl.get_tags(soup)
   dataAngel.set_tags(tags)
 
-  postExtraction(urls, dataAngel)
+  postExtraction(urls, dataAngel, url)
 
 
-def postExtraction(urls, dataAngel):
+def postExtraction(urls, dataAngel, name_url):
   posts = []
   try:
     for url in urls:
@@ -125,7 +125,7 @@ def postExtraction(urls, dataAngel):
   except:
     print("\n\nERROR\n\n")
   dataAngel.set_posts(posts)
-  xw.makexml(dataAngel, url, folder)
+  xw.makexml(dataAngel, name_url, folder)
 
 
 # def threadLevelSoup(soup, url):
