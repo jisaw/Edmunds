@@ -1,5 +1,4 @@
 from bs4 import BeautifulSoup
-import requests
 import constants
 import thread_level as tl
 import post_level as pl
@@ -8,7 +7,7 @@ import re
 import sys
 from xml_output import xmlout
 from urllib import urlopen
-import html5lib
+import lxml
 
 folder = sys.argv[1]
 
@@ -17,7 +16,7 @@ def main():
   for url in constants.start_urls:
     urls = []
     r = urlopen(url)
-    soup = BeautifulSoup(r, 'html5lib')
+    soup = BeautifulSoup(r, 'lxml')
     lp = soup.find('a', class_=re.compile('^LastPage'))
     try:
       for i in range(int(lp.string)):
@@ -38,7 +37,7 @@ def metaDataExtraction(urls):
   for url in urls:
     print(url)
     r = urlopen(url)
-    soup = BeautifulSoup(r, 'html5lib')
+    soup = BeautifulSoup(r, 'lxml')
 
     original_posters = tl.get_original_posters(soup)
 
@@ -81,7 +80,7 @@ def postPageExtraction(url, dataAngel):
   urls = []
   print(url)
   r = urlopen(url)
-  soup = BeautifulSoup(r, 'html5lib')
+  soup = BeautifulSoup(r, 'lxml')
   lp = soup.find('a', class_=re.compile('^LastPage'))
   try:
     for i in range(int(lp.string)):
@@ -107,7 +106,7 @@ def postExtraction(urls, dataAngel, name_url):
     for url in urls:
       print('Got url: ' + url)
       r = urlopen(url)
-      soup = BeautifulSoup(r, 'html5lib')
+      soup = BeautifulSoup(r, 'lxml')
 
       bodies = pl.get_post_body(soup)
       print('Got bodies')
