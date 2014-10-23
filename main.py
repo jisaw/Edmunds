@@ -84,8 +84,6 @@ def postPageExtraction(url, dataAngel):
   lp = soup.find('a', class_=re.compile('^LastPage'))
   try:
     for i in range(int(lp.string)):
-      if int(lp.string) > 300 and i > 300:
-        break
       link = lp['href']
       num = len(lp.string) + 1
       new_url = link[:-num] + 'p%s' % (i + 1)
@@ -118,6 +116,7 @@ def postExtraction(urls, dataAngel, name_url):
       print('Got dates')
       for i in range(len(bodies)):
         posts.append([users[i], dates[i], bodies[i]])
+      r.close()
   except:
     print("\n\nERROR\n\n")
   dataAngel.set_posts(posts)
