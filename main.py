@@ -7,8 +7,8 @@ import xml_write as xw
 import re
 import sys
 from xml_output import xmlout
+from urllib import urlopen
 import html5lib
-from html5lib import treebuilders
 
 folder = sys.argv[1]
 
@@ -16,11 +16,8 @@ folder = sys.argv[1]
 def main():
   for url in constants.start_urls:
     urls = []
-    r = requests.get(url)
-    with open(r) as f:
-      parser = html5lib.HTMLParser(tree = treebuilders.getTreeBuilder("beautifulsoup"))
-      data = parser.parse(f)
-      soup = BeautifulSoup(data)
+    r = urlopen(url)
+    soup = BeautifulSoup(r, 'html5lib')
     lp = soup.find('a', class_=re.compile('^LastPage'))
     try:
       for i in range(int(lp.string)):
@@ -40,11 +37,8 @@ def main():
 def metaDataExtraction(urls):
   for url in urls:
     print(url)
-    r = requests.get(url)
-    with open(r) as f:
-      parser = html5lib.HTMLParser(tree = treebuilders.getTreeBuilder("beautifulsoup"))
-      data = parser.parse(f)
-      soup = BeautifulSoup(data)
+    r = urlopen(url)
+    soup = BeautifulSoup(r, 'html5lib')
 
     original_posters = tl.get_original_posters(soup)
 
@@ -86,11 +80,8 @@ def metaDataExtraction(urls):
 def postPageExtraction(url, dataAngel):
   urls = []
   print(url)
-  r = requests.get(url)
-  with open(r) as f:
-      parser = html5lib.HTMLParser(tree = treebuilders.getTreeBuilder("beautifulsoup"))
-      data = parser.parse(f)
-      soup = BeautifulSoup(data)
+  r = urlopen(url)
+  soup = BeautifulSoup(r, 'html5lib')
   lp = soup.find('a', class_=re.compile('^LastPage'))
   try:
     for i in range(int(lp.string)):
@@ -115,11 +106,8 @@ def postExtraction(urls, dataAngel, name_url):
   try:
     for url in urls:
       print('Got url: ' + url)
-      r = requests.get(url)
-      with open(r) as f:
-        parser = html5lib.HTMLParser(tree = treebuilders.getTreeBuilder("beautifulsoup"))
-        data = parser.parse(f)
-        soup = BeautifulSoup(data)
+      r = urlopen(url)
+      soup = BeautifulSoup(r, 'html5lib')
 
       bodies = pl.get_post_body(soup)
       print('Got bodies')
