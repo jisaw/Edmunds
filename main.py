@@ -16,7 +16,8 @@ folder = sys.argv[1]
 def main():
   for url in constants.start_urls:
     urls = []
-    with open(url) as f:
+    r = requests.get(url)
+    with open(r) as f:
       parser = html5lib.HTMLParser(tree = treebuilders.getTreeBuilder("beautifulsoup"))
       data = parser.parse(f)
       soup = BeautifulSoup(data)
@@ -39,7 +40,8 @@ def main():
 def metaDataExtraction(urls):
   for url in urls:
     print(url)
-    with open(url) as f:
+    r = requests.get(url)
+    with open(r) as f:
       parser = html5lib.HTMLParser(tree = treebuilders.getTreeBuilder("beautifulsoup"))
       data = parser.parse(f)
       soup = BeautifulSoup(data)
@@ -84,7 +86,8 @@ def metaDataExtraction(urls):
 def postPageExtraction(url, dataAngel):
   urls = []
   print(url)
-  with open(url) as f:
+  r = requests.get(url)
+  with open(r) as f:
       parser = html5lib.HTMLParser(tree = treebuilders.getTreeBuilder("beautifulsoup"))
       data = parser.parse(f)
       soup = BeautifulSoup(data)
@@ -112,7 +115,8 @@ def postExtraction(urls, dataAngel, name_url):
   try:
     for url in urls:
       print('Got url: ' + url)
-      with open(url) as f:
+      r = requests.get(url)
+      with open(r) as f:
         parser = html5lib.HTMLParser(tree = treebuilders.getTreeBuilder("beautifulsoup"))
         data = parser.parse(f)
         soup = BeautifulSoup(data)
