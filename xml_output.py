@@ -8,8 +8,8 @@ class xmlout:
     self.replies = ""
     self.lastposted_date = ""
     self.lasposted_datetime = ""
-    self.tags = []
-    self.posts = []
+    self.tags = ""
+    self.posts = ""
 
   def set_orig_poster(self, value):
     self.orig_poster = value
