@@ -82,11 +82,11 @@ def postPageExtraction(url, dataAngel):
   r = urlopen(url)
   soup = BeautifulSoup(r, 'lxml')
   lp = soup.find('a', class_=re.compile('^LastPage'))
-  if int(lp.string) > 100:
-    print ('\n\n Skipping \n\n')
-  else:
-    try:
-      for i in range(int(lp.string)):
+  try:
+    if int(lp.string) > 100:
+      print ('\n\n Skipping \n\n')
+    else:
+       for i in range(int(lp.string)):
         link = lp['href']
         num = len(lp.string) + 1
         new_url = link[:-num] + 'p%s' % (i + 1)
@@ -95,8 +95,8 @@ def postPageExtraction(url, dataAngel):
           urls.append(new_url)
         else:
           print('Duplicate Link')
-    except:
-      print('\n\n  ERROR  \n\n')
+  except:
+    print('\n\n  ERROR  \n\n')
   tags = pl.get_tags(soup)
   dataAngel.set_tags(tags)
 
