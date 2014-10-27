@@ -82,7 +82,7 @@ def postPageExtraction(url, dataAngel):
   r = urlopen(url)
   soup = BeautifulSoup(r, 'lxml')
   lp = soup.find('a', class_=re.compile('^LastPage'))
-  if lp['href'] == 'http://forums.edmunds.com/discussion/2864/bmw/tl/entry-level-luxury-performance-sedans/p587':
+  if str(lp['href']) == 'http://forums.edmunds.com/discussion/2864/bmw/tl/entry-level-luxury-performance-sedans/p587':
     print ('\n\n Skipping \n\n')
   else:
     try:
