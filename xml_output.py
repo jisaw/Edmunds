@@ -1,14 +1,4 @@
 class xmlout:
-  # orig_poster = ""
-  # posted_at_date = ""
-  #posted_at_datetime = ""
-  #views = ""
-  #replies = ""
-  #lastposted_date = ""
-  #lasposted_datetime = ""
-  #tags = ""
-  #posts = ""
-
 
   def __init__(self):
     self.orig_poster = ""
