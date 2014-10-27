@@ -7,9 +7,14 @@ import re
 import sys
 from xml_output import xmlout
 from urllib import urlopen
-import lxml
+import os
 
 folder = sys.argv[1]
+
+current_dir = os.getcwd()
+os.chdir("/home/research/projects/edmunds/data")
+os.system("mkdir %s" % folder)
+os.chdir(current_dir)
 
 
 def main():
@@ -86,7 +91,7 @@ def postPageExtraction(url, dataAngel):
     if int(lp.string) > 100:
       print ('\n\n Skipping \n\n')
     else:
-       for i in range(int(lp.string)):
+      for i in range(int(lp.string)):
         link = lp['href']
         num = len(lp.string) + 1
         new_url = link[:-num] + 'p%s' % (i + 1)
@@ -129,7 +134,7 @@ def postExtraction(urls, dataAngel, name_url):
 # def threadLevelSoup(soup, url):
 # soups = []
 # urls = []
-#	for url in tl.get_post_level(soup):
+# for url in tl.get_post_level(soup):
 #		r = requests.get(url)
 #		data = r.text
 #		urls.append(url)

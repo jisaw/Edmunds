@@ -50,10 +50,6 @@ def makexml(dataAngel, url, folder):
 		body = ET.SubElement(posts, "body")
 		body.text = p[i][2]
 
-	current_dir = os.getcwd()
-	os.chdir("/home/research/projects/edmunds/data")
-	os.system("mkdir %s" % folder)
-	os.chdir(current_dir)
 
 	f = open(prefix + name, 'w')
 	with f:
