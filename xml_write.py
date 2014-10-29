@@ -2,13 +2,23 @@ import xml.etree.cElementTree as ET
 from xml.dom import minidom
 import os
 
-def makexml(dataAngel, url, folder):
+def makexml(dataAngel, url, folder, make):
+	#Formats the name for the file
 	name = '%s.xml' % url[7:]
 	name = name.replace("/", "_")
-	prefix = '../../data/%s/' % folder
+
+	#Creates a dir under the current run folder with the name of the make
+	current_dir = os.getcwd()
+	os.chdir("/home/research/projects/edmunds/data/%s", folder)
+	os.system("mkdir %s" % make)
+	os.chdir(current_dir)
+
+	prefix = '../../data/%s/%s/' % (folder, make)
+	#prefix = ''
 	t = dataAngel.get_tags()
 	p = dataAngel.get_posts()
 
+	#This is the creation of the XML tree
 	thread = ET.Element('thread')
 
 	orig_poster = ET.SubElement(thread, "orig_poster")
@@ -59,7 +69,7 @@ def makexml(dataAngel, url, folder):
 		print("\nXML WRITTEN!!")
 	f.close()
 
-
+#A method to prettify the XML --Curently not in use
 def prettify(elem):
 	rough_string = ET.tostring(elem, 'utf-8')
 	reparsed = minidom.parseString(rough_string)

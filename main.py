@@ -10,6 +10,9 @@ from urllib import urlopen
 import os
 import lxml
 
+
+#Takes in the command line argument immediatly after main.py and creates
+#a folder with that name in the data directory 
 folder = sys.argv[1]
 
 current_dir = os.getcwd()
@@ -17,9 +20,14 @@ os.chdir("/home/research/projects/edmunds/data")
 os.system("mkdir %s" % folder)
 os.chdir(current_dir)
 
+make = ''
+i = 0
 
+#This starts with the constant urls and creates a list of all the thread level pages
 def main():
   for url in constants.start_urls:
+    make = constants.MAKES[i]
+    i += 1
     urls = []
     r = urlopen(url)
     soup = BeautifulSoup(r, 'lxml')
@@ -38,7 +46,7 @@ def main():
       print('\n\n  ERROR  \n\n')
     metaDataExtraction(urls)
 
-
+#Is run on every thread level page. it scrapes the meta data, adds it to the dataAngel class, and then passes the links along for the post level scraping
 def metaDataExtraction(urls):
   for url in urls:
     print(url)
@@ -81,7 +89,7 @@ def metaDataExtraction(urls):
       print(threadUrls[i])
       postPageExtraction(threadUrls[i], dataAngel)
 
-
+#This is where all of the post level pages are added to a list to be iterated over. Also the tags are scraped and stored in the dataAngel class with the other information
 def postPageExtraction(url, dataAngel):
   urls = []
   print(url)
@@ -89,18 +97,18 @@ def postPageExtraction(url, dataAngel):
   soup = BeautifulSoup(r, 'lxml')
   lp = soup.find('a', class_=re.compile('^LastPage'))
   try:
-    if int(lp.string) > 100:
-      print ('\n\n Skipping \n\n')
-    else:
-      for i in range(int(lp.string)):
-        link = lp['href']
-        num = len(lp.string) + 1
-        new_url = link[:-num] + 'p%s' % (i + 1)
-        if new_url not in urls:
-          print(new_url)
-          urls.append(new_url)
-        else:
-          print('Duplicate Link')
+    #if int(lp.string) > 100:
+    #print ('\n\n Skipping \n\n')
+    #else:
+    for i in range(int(lp.string)):
+      link = lp['href']
+      num = len(lp.string) + 1
+      new_url = link[:-num] + 'p%s' % (i + 1)
+      if new_url not in urls:
+        print(new_url)
+        urls.append(new_url)
+      else:
+        print('Duplicate Link')
   except:
     print('\n\n  ERROR  \n\n')
   tags = pl.get_tags(soup)
@@ -108,7 +116,7 @@ def postPageExtraction(url, dataAngel):
 
   postExtraction(urls, dataAngel, url)
 
-
+#Finally. this is where the posts themselves are scraped. They are also added to the dataAngel class and passed to the xml writing script.
 def postExtraction(urls, dataAngel, name_url):
   posts = []
   try:
