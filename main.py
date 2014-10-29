@@ -45,10 +45,10 @@ def main():
           print('Duplicate Link')
     except:
       print('\n\n  ERROR  \n\n')
-    metaDataExtraction(urls)
+    metaDataExtraction(urls, dataAngel)
 
 #Is run on every thread level page. it scrapes the meta data, adds it to the dataAngel class, and then passes the links along for the post level scraping
-def metaDataExtraction(urls):
+def metaDataExtraction(urls, dataAngel):
   for url in urls:
     print(url)
     r = urlopen(url)
