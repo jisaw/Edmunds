@@ -25,12 +25,13 @@ os.chdir(current_dir)
 def main():
   dataAngel = xmlout()
   i = 0
-  for url in constants.start_urls:
+  for i in range(len(constants.start_urls)):
+  #for url in constants.start_urls:
     make = constants.MAKES[i]
-    dataAngel.set_make(make)
-    i += 1
+    #dataAngel.set_make(make)
+    #i += 1
     urls = []
-    r = urlopen(url)
+    r = urlopen(constants.start_urls[i])
     soup = BeautifulSoup(r, 'lxml')
     lp = soup.find('a', class_=re.compile('^LastPage'))
     try:
@@ -45,10 +46,10 @@ def main():
           print('Duplicate Link')
     except:
       print('\n\n  ERROR  \n\n')
-    metaDataExtraction(urls, dataAngel)
+    metaDataExtraction(urls, dataAngel, make)
 
 #Is run on every thread level page. it scrapes the meta data, adds it to the dataAngel class, and then passes the links along for the post level scraping
-def metaDataExtraction(urls, dataAngel):
+def metaDataExtraction(urls, dataAngel, make):
   for url in urls:
     print(url)
     r = urlopen(url)
@@ -87,10 +88,10 @@ def metaDataExtraction(urls, dataAngel):
       print(lp_dt[i])
       dataAngel.set_lastposted_datetime(lp_dt[i])
       print(threadUrls[i])
-      postPageExtraction(threadUrls[i], dataAngel)
+      postPageExtraction(threadUrls[i], dataAngel, make)
 
 #This is where all of the post level pages are added to a list to be iterated over. Also the tags are scraped and stored in the dataAngel class with the other information
-def postPageExtraction(url, dataAngel):
+def postPageExtraction(url, dataAngel, make):
   urls = []
   print(url)
   r = urlopen(url)
@@ -114,10 +115,10 @@ def postPageExtraction(url, dataAngel):
   tags = pl.get_tags(soup)
   dataAngel.set_tags(tags)
 
-  postExtraction(urls, dataAngel, url)
+  postExtraction(urls, dataAngel, url, make)
 
 #Finally. this is where the posts themselves are scraped. They are also added to the dataAngel class and passed to the xml writing script.
-def postExtraction(urls, dataAngel, name_url):
+def postExtraction(urls, dataAngel, name_url, make):
   posts = []
   try:
     for url in urls:
@@ -137,7 +138,7 @@ def postExtraction(urls, dataAngel, name_url):
   except:
     print("\n\nERROR\n\n")
   dataAngel.set_posts(posts)
-  xw.makexml(dataAngel, name_url, folder)
+  xw.makexml(dataAngel, name_url, folder, make)
 
 if __name__ == "__main__":
   main()  #
