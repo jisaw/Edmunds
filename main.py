@@ -26,6 +26,7 @@ def main():
   i = 0
   for url in constants.start_urls:
     make = constants.MAKES[i]
+    dataAngel.set_make(make)
     i += 1
     urls = []
     r = urlopen(url)
@@ -43,7 +44,7 @@ def main():
           print('Duplicate Link')
     except:
       print('\n\n  ERROR  \n\n')
-    metaDataExtraction(urls)
+    metaDataExtraction(urls, make)
 
 #Is run on every thread level page. it scrapes the meta data, adds it to the dataAngel class, and then passes the links along for the post level scraping
 def metaDataExtraction(urls):

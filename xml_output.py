@@ -10,6 +10,7 @@ class xmlout:
     self.lasposted_datetime = ""
     self.tags = ""
     self.posts = ""
+    self.make = ""
 
   def set_orig_poster(self, value):
     self.orig_poster = value
@@ -37,6 +38,12 @@ class xmlout:
 
   def set_posts(self, value):
     self.posts = value
+
+  def set_make(self, value):
+    self.make = value
+
+  def get_make(self):
+    return self.make
 
   def get_orig_poster(self):
     return self.orig_poster
