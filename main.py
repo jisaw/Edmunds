@@ -23,6 +23,7 @@ os.chdir(current_dir)
 
 #This starts with the constant urls and creates a list of all the thread level pages
 def main():
+  dataAngel = xmlout()
   i = 0
   for url in constants.start_urls:
     make = constants.MAKES[i]
@@ -69,7 +70,6 @@ def metaDataExtraction(urls):
 
     threadUrls = tl.get_post_level(soup)
 
-    dataAngel = xmlout()
 
     for i in range(len(date_title)):
       print(original_posters[i])
