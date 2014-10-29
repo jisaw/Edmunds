@@ -20,11 +20,10 @@ os.chdir("/home/research/projects/edmunds/data")
 os.system("mkdir %s" % folder)
 os.chdir(current_dir)
 
-make = ''
-i = 0
 
 #This starts with the constant urls and creates a list of all the thread level pages
 def main():
+  i = 0
   for url in constants.start_urls:
     make = constants.MAKES[i]
     i += 1
