@@ -2,10 +2,11 @@ import xml.etree.cElementTree as ET
 from xml.dom import minidom
 import os
 
-def makexml(dataAngel, url, folder, make):
+def makexml(dataAngel, url, folder):
 	#Formats the name for the file
 	name = '%s.xml' % url[7:]
 	name = name.replace("/", "_")
+	make = dataAngel.get_make()
 
 	#Creates a dir under the current run folder with the name of the make
 	current_dir = os.getcwd()
