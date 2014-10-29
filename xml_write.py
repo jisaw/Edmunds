@@ -10,8 +10,7 @@ def makexml(dataAngel, url, folder):
 
 	#Creates a dir under the current run folder with the name of the make
 	current_dir = os.getcwd()
-	new_dir = "/home/research/projects/edmunds/data/%s", folder
-	os.chdir(str(new_dir))
+	os.chdir("/home/research/projects/edmunds/data/%s" % folder)
 	os.system("mkdir %s" % make)
 	os.chdir(current_dir)
 
