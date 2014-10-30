@@ -28,8 +28,10 @@ def main():
   for i in range(len(constants.start_urls)):
   #for url in constants.start_urls:
     make = constants.MAKES[i]
-    #dataAngel.set_make(make)
-    #i += 1
+    os.chdir("/home/research/projects/edmunds/data/%s" % folder)
+    os.system("mkdir %s" % make)
+    os.chdir(current_dir)
+
     urls = []
     r = urlopen(constants.start_urls[i])
     soup = BeautifulSoup(r, 'lxml')
