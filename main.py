@@ -18,7 +18,7 @@ import datetime
 folder = sys.argv[1]
 
 current_dir = os.getcwd()
-os.chdir("/home/research/projects/edmunds/data")
+#os.chdir("/home/research/projects/edmunds/data")
 os.system("mkdir %s" % folder)
 os.chdir(current_dir)
 
