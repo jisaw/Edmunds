@@ -33,7 +33,7 @@ def main():
     print('for i in range(len(constants.start_urls))')
     print datetime.datetime.now().strftime('%H:%M:%S')
     make = constants.MAKES[i]
-    os.chdir("/home/research/projects/edmunds/data/%s" % folder)
+    #os.chdir("/home/research/projects/edmunds/data/%s" % folder)
     os.system("mkdir %s" % make)
     os.chdir(current_dir)
 
