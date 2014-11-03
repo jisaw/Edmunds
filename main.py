@@ -3,6 +3,7 @@ import constants
 import thread_level as tl
 import post_level as pl
 import xml_write as xw
+import requests
 import re
 import sys
 from xml_output import xmlout
@@ -27,7 +28,6 @@ def main():
   print('starting main')
   print datetime.datetime.now().strftime('%H:%M:%S')
   dataAngel = xmlout()
-  i = 0
   for i in range(len(constants.start_urls)):
   #for url in constants.start_urls:
     print('for i in range(len(constants.start_urls))')
@@ -40,8 +40,9 @@ def main():
     urls = []
     print('Crated make folder')
     print datetime.datetime.now().strftime('%H:%M:%S')
-    r = urlopen(constants.start_urls[i])
-    soup = BeautifulSoup(r, 'lxml')
+    r = requests.get(constants.start_urls[i])
+    data = r.text
+    soup = BeautifulSoup(data, 'lxml')
     print('soup opened')
     print datetime.datetime.now().strftime('%H:%M:%S')
     lp = soup.find('a', class_=re.compile('^LastPage'))
@@ -76,8 +77,9 @@ def metaDataExtraction(urls, dataAngel, make):
     print(url)
     print('getting meta data')
     print datetime.datetime.now().strftime('%H:%M:%S')
-    r = urlopen(url)
-    soup = BeautifulSoup(r, 'lxml')
+    r = requests.get(url)
+    data = r.text
+    soup = BeautifulSoup(data, 'lxml')
 
     original_posters = tl.get_original_posters(soup)
 
@@ -122,8 +124,9 @@ def metaDataExtraction(urls, dataAngel, make):
 def postPageExtraction(url, dataAngel, make):
   urls = []
   print(url)
-  r = urlopen(url)
-  soup = BeautifulSoup(r, 'lxml')
+  r = requests.get(url)
+  data = r.text
+  soup = BeautifulSoup(data, 'lxml')
   lp = soup.find('a', class_=re.compile('^LastPage'))
   try:
     #if int(lp.string) > 100:
@@ -155,8 +158,9 @@ def postExtraction(urls, dataAngel, name_url, make):
   try:
     for url in urls:
       print('Got url: ' + url)
-      r = urlopen(url)
-      soup = BeautifulSoup(r, 'lxml')
+      r = requests.get(url)
+      data = r.text
+      soup = BeautifulSoup(data, 'lxml')
 
       bodies = pl.get_post_body(soup)
       print('Got bodies')
@@ -177,4 +181,4 @@ def postExtraction(urls, dataAngel, name_url, make):
   print datetime.datetime.now().strftime('%H:%M:%S')
 
 if __name__ == "__main__":
-  main()  #
+  main()
