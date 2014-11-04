@@ -33,7 +33,7 @@ def get_post_date(tree):
 def get_tags(tree):
     tags = []
     meta_tags = tree.xpath("//div[@class='InlineTags Meta']/ul/li/a/text()")
-    t = meta_tags.find_all('a')
-    for tag in t:
+    #t = meta_tags.find_all('a')
+    for tag in meta_tags:
         tags.append(tag.string)
     return tags
