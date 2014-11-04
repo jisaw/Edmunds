@@ -40,8 +40,7 @@ def main():
     urls = []
     print('Crated make folder')
     print datetime.datetime.now().strftime('%H:%M:%S')
-  #REMOVE THE +1 IN THE START URLS INDEX BELOW
-    r = requests.get(constants.start_urls[i+1])
+    r = requests.get(constants.start_urls[i])
     data = r.text
     soup = BeautifulSoup(data, 'lxml')
     print('soup opened')
