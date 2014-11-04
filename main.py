@@ -40,7 +40,8 @@ def main():
     urls = []
     print('Crated make folder')
     print datetime.datetime.now().strftime('%H:%M:%S')
-    r = requests.get(constants.start_urls[i])
+  #REMOVE THE +1 IN THE START URLS INDEX BELOW
+    r = requests.get(constants.start_urls[i+1])
     data = r.text
     soup = BeautifulSoup(data, 'lxml')
     print('soup opened')
@@ -166,12 +167,12 @@ def postExtraction(urls, dataAngel, name_url, make):
       r = requests.get(url)
       data = r.text
       soup = BeautifulSoup(data, 'lxml')
-      #tree = html.fromstring(data)
+      tree = html.fromstring(data)
       bodies = pl.get_post_body(soup)
       print('Got bodies')
-      users = pl.get_post_user(soup)
+      users = pl.get_post_user(tree)
       print('Got users')
-      dates = pl.get_post_date(soup)
+      dates = pl.get_post_date(tree)
       print('Got dates')
       print('\n\n\n\n\n\n\n usr: %s \ndate: %s \nbod: %s' % (len(users), len(dates), len(bodies)))
       for i in range(len(users)):

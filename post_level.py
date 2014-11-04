@@ -14,19 +14,19 @@ def get_post_body(soup):
     return bodies
 
 
-def get_post_user(soup):
+def get_post_user(tree):
     usernames = []
-    username = soup.find_all(class_='Username')
+    username = tree.xpath("//a[@class='Username']/text()")
     for user in username:
-        usernames.append(user.string)
+        usernames.append(user)
     return usernames
 
 
-def get_post_date(soup):
+def get_post_date(tree):
     dates = []
-    d = soup.find_all('time')
+    d = tree.xpath('//div/a[@class = "Permalink"]/time/@title')
     for date in d:
-        dates.append(date['datetime'])
+        dates.append(date)
     return dates
 
 
