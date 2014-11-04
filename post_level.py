@@ -2,21 +2,21 @@ from bs4 import BeautifulSoup
 import requests
 import re
 import string
-import lxml
+from lxml import html
 
 
-def get_post_body(soup):
+def get_post_body(tree):
     bodies = []
     bod = []
-    b = soup.find_all(class_='Message')
+    b = tree.xpath("//div[@class='Comment']/dic[@class='Message']/p/text()")
     for body in b:
-        bodies.append(''.join(body.stripped_strings))
+        bodies.append(body)
     return bodies
 
 
 def get_post_user(tree):
     usernames = []
-    username = tree.xpath("//a[@class='Username']/text()")
+    username = tree.xpath("//div[@class='Comment']/span[@class='Author']/a[@class='Username']/text()")
     for user in username:
         usernames.append(user)
     return usernames
@@ -24,7 +24,7 @@ def get_post_user(tree):
 
 def get_post_date(tree):
     dates = []
-    d = tree.xpath('//div/a[@class = "Permalink"]/time/@title')
+    d = tree.xpath("//div[@class='Comment']/div[@class='Meta CommentMeta CommentInfo']/span/a/time/@title")
     for date in d:
         dates.append(date)
     return dates

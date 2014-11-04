@@ -170,7 +170,7 @@ def postExtraction(urls, dataAngel, name_url, make):
       data = r.text
       soup = BeautifulSoup(data, 'lxml')
       tree = html.fromstring(data)
-      bodies = pl.get_post_body(soup)
+      bodies = pl.get_post_body(tree)
       print('Got bodies')
       users = pl.get_post_user(tree)
       print('Got users')
