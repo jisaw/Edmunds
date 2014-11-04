@@ -8,8 +8,8 @@ def makexml(dataAngel, url, folder, make):
     name = '%s.xml' % url[7:]
     name = name.replace("/", "_")
 
-    #prefix = '../../data/%s/%s/' % (folder, make)
-    prefix = '%s/' % ( make)
+    prefix = '../../data/%s/%s/' % (folder, make)
+    #prefix = '%s/' % ( make)
     t = dataAngel.get_tags()
     p = dataAngel.get_posts()
 

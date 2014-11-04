@@ -11,7 +11,7 @@ def get_post_body(tree):
     #b = soup.find_all(class_='Message')
     b = tree.xpath("//div[@class='Message']")
     for body in b:
-        bodies.append(body.xpath('./p/text()'))
+        bodies.append(''.join(body.xpath('./text() | ./p/text()')))
     return bodies
 
 

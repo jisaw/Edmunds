@@ -33,7 +33,7 @@ def main():
     print('for i in range(len(constants.start_urls))')
     print datetime.datetime.now().strftime('%H:%M:%S')
     make = constants.MAKES[i]
-    #os.chdir("/home/research/projects/edmunds/data/%s" % folder)
+    os.chdir("/home/research/projects/edmunds/data/%s" % folder)
     os.system("mkdir %s" % make)
     os.chdir(current_dir)
 
@@ -169,14 +169,14 @@ def postExtraction(urls, dataAngel, name_url, make):
       data = r.text
       soup = BeautifulSoup(data, 'lxml')
       tree = html.fromstring(data)
-      bodies = pl.get_post_body(soup)
+      bodies = pl.get_post_body(tree)
       print('Got bodies')
-      users = pl.get_post_user(soup)
+      users = pl.get_post_user(tree)
       print('Got users')
-      dates = pl.get_post_date(soup)
+      dates = pl.get_post_date(tree)
       print('Got dates')
       print('\n\n\n\n\n\n\n usr: %s \ndate: %s \nbod: %s' % (len(users), len(dates), len(bodies)))
-      for i in range(len(users)):
+      for i in range(len(bodies)):
         posts.append([users[i], dates[i], bodies[i]])
     except:
       print("\n\nERROR\n\n")
