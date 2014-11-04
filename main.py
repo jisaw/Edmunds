@@ -157,6 +157,7 @@ def postPageExtraction(url, dataAngel, make):
 def postExtraction(urls, dataAngel, name_url, make):
   posts = []
   try:
+    print('length of urls: %s' % len(urls))
     for url in urls:
       print('Got url: ' + url)
       r = requests.get(url)
