@@ -15,9 +15,9 @@ def get_post_level(soup):
 def get_original_posters(tree):
     posters = []
     #p = soup.find_all(class_='UserLink BlockTitle')
-    p = tree.xpath("//tbody/tr/td[@class='BlockColumn BlockColumn-User FirstUser']/div[@class='Block Wrap']/a[@class='UserLink BlockTitle']")
+    p = tree.xpath("//tbody/tr/td[@class='BlockColumn BlockColumn-User FirstUser']/div[@class='Block Wrap']/a[@class='UserLink BlockTitle']/text()")
     for username in p:
-        posters.append(username.string)
+        posters.append(username)
     return posters
 
 
