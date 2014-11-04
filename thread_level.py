@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+from lxml import html
 
 
 def get_post_level(soup):
@@ -11,9 +12,10 @@ def get_post_level(soup):
     return urls
 
 
-def get_original_posters(soup):
+def get_original_posters(tree):
     posters = []
-    p = soup.find_all(class_='UserLink BlockTitle')
+    #p = soup.find_all(class_='UserLink BlockTitle')
+    p = tree.xpath("//tbody/tr/td[@class='BlockColumn BlockColumn-User FirstUser']/div[@class='Block Wrap']/a[@class='UserLink BlockTitle']")
     for username in p:
         posters.append(username.string)
     return posters

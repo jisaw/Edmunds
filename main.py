@@ -80,8 +80,9 @@ def metaDataExtraction(urls, dataAngel, make):
     r = requests.get(url)
     data = r.text
     soup = BeautifulSoup(data, 'lxml')
+    tree = html.fromstring(data)
 
-    original_posters = tl.get_original_posters(soup)
+    original_posters = tl.get_original_posters(tree)
 
     dates = tl.get_date(soup)
     date_title = dates[0]
@@ -162,7 +163,7 @@ def postExtraction(urls, dataAngel, name_url, make):
       r = requests.get(url)
       data = r.text
       soup = BeautifulSoup(data, 'lxml')
-      tree = html.fromstring(data)
+      #tree = html.fromstring(data)
       bodies = pl.get_post_body(soup)
       print('Got bodies')
       users = pl.get_post_user(soup)
@@ -172,7 +173,6 @@ def postExtraction(urls, dataAngel, name_url, make):
       print('\n\n\n\n\n\n\n usr: %s \ndate: %s \nbod: %s' % (len(users), len(dates), len(bodies)))
       for i in range(len(users)):
         posts.append([users[i], dates[i], bodies[i]])
-      r.close()
     except:
       print("\n\nERROR\n\n")
   dataAngel.set_posts(posts)
