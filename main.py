@@ -151,7 +151,7 @@ def postPageExtraction(url, dataAngel, make):
       except:
         print('\n\n  ERROR  \n\n')
     tags = pl.get_tags(tree)
-  dataAngel.set_tags(tags)
+    dataAngel.set_tags(tags)
 
   print('calling postExtraction')
   print datetime.datetime.now().strftime('%H:%M:%S')
