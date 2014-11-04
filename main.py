@@ -46,25 +46,25 @@ def main():
     print('soup opened')
     print datetime.datetime.now().strftime('%H:%M:%S')
     lp = soup.find('a', class_=re.compile('^LastPage'))
-    try:
-      for i in range(int(lp.string)):
-        print('with lp try')
-        print datetime.datetime.now().strftime('%H:%M:%S')
-        new_num = lp['href'].find('=') + 1
-        new_end = lp['href'][:new_num] + 'p%s&' % (i + 1)
-        new_url = 'http://forums.edmunds.com' + new_end
-        print('Created new url')
-        print datetime.datetime.now().strftime('%H:%M:%S')
-        if new_url not in urls:
-          print(new_url)
-          urls.append(new_url)
-          print('Added URL')
+    for i in range(int(lp.string)):
+        try:
+            print('with lp try')
+            print datetime.datetime.now().strftime('%H:%M:%S')
+            new_num = lp['href'].find('=') + 1
+            new_end = lp['href'][:new_num] + 'p%s&' % (i + 1)
+            new_url = 'http://forums.edmunds.com' + new_end
+            print('Created new url')
+            print datetime.datetime.now().strftime('%H:%M:%S')
+            if new_url not in urls:
+              print(new_url)
+              urls.append(new_url)
+              print('Added URL')
+              print datetime.datetime.now().strftime('%H:%M:%S')
+            else:
+              print('Duplicate Link')
+        except:
+          print('\n\n  ERROR  \n\n')
           print datetime.datetime.now().strftime('%H:%M:%S')
-        else:
-          print('Duplicate Link')
-    except:
-      print('\n\n  ERROR  \n\n')
-      print datetime.datetime.now().strftime('%H:%M:%S')
     print('calling metaDataExtraction')
     print datetime.datetime.now().strftime('%H:%M:%S')
     metaDataExtraction(urls, dataAngel, make)
@@ -129,11 +129,11 @@ def postPageExtraction(url, dataAngel, make):
   soup = BeautifulSoup(data, 'lxml')
   tree = html.fromstring(data)
   lp = soup.find('a', class_=re.compile('^LastPage'))
-  try:
-    #if int(lp.string) > 100:
-    #print ('\n\n Skipping \n\n')
-    #else:
-    for i in range(int(lp.string)):
+  for i in range(int(lp.string)):
+    try:
+      #if int(lp.string) > 100:
+      #print ('\n\n Skipping \n\n')
+      #else:
       link = lp['href']
       num = len(lp.string) + 1
       new_url = link[:-num] + 'p%s' % (i + 1)
@@ -142,8 +142,8 @@ def postPageExtraction(url, dataAngel, make):
         urls.append(new_url)
       else:
         print('Duplicate Link')
-  except:
-    print('\n\n  ERROR  \n\n')
+    except:
+      print('\n\n  ERROR  \n\n')
   tags = pl.get_tags(tree)
   dataAngel.set_tags(tags)
 
