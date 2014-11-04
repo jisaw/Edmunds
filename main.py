@@ -169,11 +169,11 @@ def postExtraction(urls, dataAngel, name_url, make):
       data = r.text
       soup = BeautifulSoup(data, 'lxml')
       tree = html.fromstring(data)
-      bodies = pl.get_post_body(tree)
+      bodies = pl.get_post_body(soup)
       print('Got bodies')
-      users = pl.get_post_user(tree)
+      users = pl.get_post_user(soup)
       print('Got users')
-      dates = pl.get_post_date(tree)
+      dates = pl.get_post_date(soup)
       print('Got dates')
       print('\n\n\n\n\n\n\n usr: %s \ndate: %s \nbod: %s' % (len(users), len(dates), len(bodies)))
       for i in range(len(users)):
