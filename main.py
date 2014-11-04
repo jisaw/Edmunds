@@ -170,7 +170,7 @@ def postExtraction(urls, dataAngel, name_url, make):
       print('Got users')
       dates = pl.get_post_date(soup)
       print('Got dates')
-      for i in range(len(dates)):
+      for i in range(len(users)):
         posts.append([users[i], dates[i], bodies[i]])
       r.close()
   except:
