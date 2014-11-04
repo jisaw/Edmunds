@@ -47,30 +47,31 @@ def main():
     print('soup opened')
     print datetime.datetime.now().strftime('%H:%M:%S')
     lp = soup.find('a', class_=re.compile('^LastPage'))
-    for i in range(int(lp.string)):
-        try:
-            print('with lp try')
-            print datetime.datetime.now().strftime('%H:%M:%S')
-            new_num = lp['href'].find('=') + 1
-            new_end = lp['href'][:new_num] + 'p%s&' % (i + 1)
-            new_url = 'http://forums.edmunds.com' + new_end
-            print('Created new url')
-            print datetime.datetime.now().strftime('%H:%M:%S')
-            if new_url not in urls:
-              print(new_url)
-              urls.append(new_url)
-              print('Added URL')
+    if (lp is not None):
+        for i in range(int(lp.string)):
+            try:
+                print('with lp try')
+                print datetime.datetime.now().strftime('%H:%M:%S')
+                new_num = lp['href'].find('=') + 1
+                new_end = lp['href'][:new_num] + 'p%s&' % (i + 1)
+                new_url = 'http://forums.edmunds.com' + new_end
+                print('Created new url')
+                print datetime.datetime.now().strftime('%H:%M:%S')
+                if new_url not in urls:
+                  print(new_url)
+                  urls.append(new_url)
+                  print('Added URL')
+                  print datetime.datetime.now().strftime('%H:%M:%S')
+                else:
+                  print('Duplicate Link')
+            except:
+              print('\n\n  ERROR  \n\n')
               print datetime.datetime.now().strftime('%H:%M:%S')
-            else:
-              print('Duplicate Link')
-        except:
-          print('\n\n  ERROR  \n\n')
-          print datetime.datetime.now().strftime('%H:%M:%S')
-    print('calling metaDataExtraction')
-    print datetime.datetime.now().strftime('%H:%M:%S')
-    metaDataExtraction(urls, dataAngel, make)
-    print('metaDataExtraction finished')
-    print datetime.datetime.now().strftime('%H:%M:%S')
+        print('calling metaDataExtraction')
+        print datetime.datetime.now().strftime('%H:%M:%S')
+        metaDataExtraction(urls, dataAngel, make)
+        print('metaDataExtraction finished')
+        print datetime.datetime.now().strftime('%H:%M:%S')
 
 #Is run on every thread level page. it scrapes the meta data, adds it to the dataAngel class, and then passes the links along for the post level scraping
 def metaDataExtraction(urls, dataAngel, make):
