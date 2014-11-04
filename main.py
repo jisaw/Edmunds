@@ -156,15 +156,13 @@ def postPageExtraction(url, dataAngel, make):
 #Finally. this is where the posts themselves are scraped. They are also added to the dataAngel class and passed to the xml writing script.
 def postExtraction(urls, dataAngel, name_url, make):
   posts = []
-  try:
-    print('length of urls: %s' % len(urls))
-    for url in urls:
+  for url in urls:
+    try:
       print('Got url: ' + url)
       r = requests.get(url)
       data = r.text
       soup = BeautifulSoup(data, 'lxml')
       tree = html.fromstring(data)
-
       bodies = pl.get_post_body(soup)
       print('Got bodies')
       users = pl.get_post_user(soup)
@@ -175,8 +173,8 @@ def postExtraction(urls, dataAngel, name_url, make):
       for i in range(len(users)):
         posts.append([users[i], dates[i], bodies[i]])
       r.close()
-  except:
-    print("\n\nERROR\n\n")
+    except:
+      print("\n\nERROR\n\n")
   dataAngel.set_posts(posts)
   print('calling makexml')
   print datetime.datetime.now().strftime('%H:%M:%S')
