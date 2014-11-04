@@ -134,22 +134,23 @@ def postPageExtraction(url, dataAngel, make):
     lp = soup.find('a', class_=re.compile('^LastPage'))
   except:
     print('')
-  for i in range(int(lp.string)):
-    try:
-      #if int(lp.string) > 100:
-      #print ('\n\n Skipping \n\n')
-      #else:
-      link = lp['href']
-      num = len(lp.string) + 1
-      new_url = link[:-num] + 'p%s' % (i + 1)
-      if new_url not in urls:
-        print(new_url)
-        urls.append(new_url)
-      else:
-        print('Duplicate Link')
-    except:
-      print('\n\n  ERROR  \n\n')
-  tags = pl.get_tags(tree)
+  if (lp is not None):
+    for i in range(int(lp.string)):
+      try:
+        #if int(lp.string) > 100:
+        #print ('\n\n Skipping \n\n')
+        #else:
+        link = lp['href']
+        num = len(lp.string) + 1
+        new_url = link[:-num] + 'p%s' % (i + 1)
+        if new_url not in urls:
+          print(new_url)
+          urls.append(new_url)
+        else:
+          print('Duplicate Link')
+      except:
+        print('\n\n  ERROR  \n\n')
+    tags = pl.get_tags(tree)
   dataAngel.set_tags(tags)
 
   print('calling postExtraction')
