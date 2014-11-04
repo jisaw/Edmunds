@@ -129,7 +129,10 @@ def postPageExtraction(url, dataAngel, make):
   data = r.text
   soup = BeautifulSoup(data, 'lxml')
   tree = html.fromstring(data)
-  lp = soup.find('a', class_=re.compile('^LastPage'))
+  try:
+    lp = soup.find('a', class_=re.compile('^LastPage'))
+  except:
+    print('')
   for i in range(int(lp.string)):
     try:
       #if int(lp.string) > 100:
