@@ -62,7 +62,6 @@ def makexml(dataAngel, url, folder, make):
         tree.write(f)
         print("\nXML WRITTEN!!")
     f.close()
-    dataAngel = ''
 
 # A method to prettify the XML --Curently not in use
 def prettify(elem):

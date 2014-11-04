@@ -9,7 +9,7 @@ import sys
 from xml_output import xmlout
 from urllib import urlopen
 import os
-import lxml
+from lxml import html
 import datetime
 
 
@@ -127,6 +127,7 @@ def postPageExtraction(url, dataAngel, make):
   r = requests.get(url)
   data = r.text
   soup = BeautifulSoup(data, 'lxml')
+  tree = html.fromstring(data)
   lp = soup.find('a', class_=re.compile('^LastPage'))
   try:
     #if int(lp.string) > 100:
@@ -143,7 +144,7 @@ def postPageExtraction(url, dataAngel, make):
         print('Duplicate Link')
   except:
     print('\n\n  ERROR  \n\n')
-  tags = pl.get_tags(soup)
+  tags = pl.get_tags(tree)
   dataAngel.set_tags(tags)
 
   print('calling postExtraction')
@@ -161,12 +162,13 @@ def postExtraction(urls, dataAngel, name_url, make):
       r = requests.get(url)
       data = r.text
       soup = BeautifulSoup(data, 'lxml')
+      tree = html.fromstring(data)
 
-      bodies = pl.get_post_body(soup)
+      bodies = pl.get_post_body(tree)
       print('Got bodies')
-      users = pl.get_post_user(soup)
+      users = pl.get_post_user(tree)
       print('Got users')
-      dates = pl.get_post_date(soup)
+      dates = pl.get_post_date(tree)
       print('Got dates')
       for i in range(len(bodies)):
         posts.append([users[i], dates[i], bodies[i]])
