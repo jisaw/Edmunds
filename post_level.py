@@ -5,30 +5,27 @@ import string
 import lxml
 
 
-def get_post_body(tree):
+def get_post_body(soup):
     bodies = []
     bod = []
-    b = tree.xpath("//div[@class='Item-Body']/div[@class='Message']")
+    b = soup.find_all(class_='Message')
     for body in b:
-        print body
         bodies.append(''.join(body.stripped_strings))
     return bodies
 
 
-def get_post_user(tree):
+def get_post_user(soup):
     usernames = []
-    username = tree.xpath("//a[@class='Username']/text()")
+    username = soup.find_all(class_='Username')
     for user in username:
-        print user
         usernames.append(user.string)
     return usernames
 
 
-def get_post_date(tree):
+def get_post_date(soup):
     dates = []
-    d = tree.xpath("//span[@class='MItem DateCreated']/a/time")
+    d = soup.find_all('time')
     for date in d:
-        print date
         dates.append(date['datetime'])
     return dates
 
@@ -36,7 +33,7 @@ def get_post_date(tree):
 def get_tags(tree):
     tags = []
     meta_tags = tree.xpath("//div[@class='InlineTags Meta']/ul/li/a/text()")
-    #t = meta_tags.find_all('a')
+    # t = meta_tags.find_all('a')
     for tag in meta_tags:
         tags.append(tag)
     return tags
