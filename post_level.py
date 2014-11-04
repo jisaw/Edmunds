@@ -8,7 +8,7 @@ import lxml
 def get_post_body(tree):
     bodies = []
     bod = []
-    b = tree.xpath("//div[@class='Item-Body']/div[@class='Message']/text()")
+    b = tree.xpath("//div[@class='Item-Body']/div[@class='Message']")
     for body in b:
         bodies.append(''.join(body.stripped_strings))
     return bodies
@@ -16,7 +16,7 @@ def get_post_body(tree):
 
 def get_post_user(tree):
     usernames = []
-    username = tree.xpath("//a[@class='Username']/text()")
+    username = tree.xpath("//a[@class='Username']")
     for user in username:
         usernames.append(user.string)
     return usernames
