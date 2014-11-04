@@ -10,14 +10,16 @@ def get_post_body(tree):
     bod = []
     b = tree.xpath("//div[@class='Item-Body']/div[@class='Message']")
     for body in b:
+        print body
         bodies.append(''.join(body.stripped_strings))
     return bodies
 
 
 def get_post_user(tree):
     usernames = []
-    username = tree.xpath("//a[@class='Username']")
+    username = tree.xpath("//a[@class='Username']/text()")
     for user in username:
+        print user
         usernames.append(user.string)
     return usernames
 
@@ -26,6 +28,7 @@ def get_post_date(tree):
     dates = []
     d = tree.xpath("//span[@class='MItem DateCreated']/a/time")
     for date in d:
+        print date
         dates.append(date['datetime'])
     return dates
 
