@@ -46,7 +46,7 @@ def main():
     print('soup opened')
     print datetime.datetime.now().strftime('%H:%M:%S')
     lp = soup.find('a', class_=re.compile('^LastPage'))
-    if (lp is not None):
+    if lp is not None:
         for i in range(int(lp.string)):
             try:
                 print('with lp try')
@@ -71,6 +71,9 @@ def main():
         metaDataExtraction(urls, dataAngel, make)
         print('metaDataExtraction finished')
         print datetime.datetime.now().strftime('%H:%M:%S')
+    else:
+        urls.append(constants.start_urls[i])
+        metaDataExtraction(urls, dataAngel, make)
 
 #Is run on every thread level page. it scrapes the meta data, adds it to the dataAngel class, and then passes the links along for the post level scraping
 def metaDataExtraction(urls, dataAngel, make):
